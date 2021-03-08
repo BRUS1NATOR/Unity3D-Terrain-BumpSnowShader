@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631d2554389f12d4491a0ed8d3c27ed5, type: 3}
+  m_Name: CustomTextures
+  m_EditorClassIdentifier: 
+  textureArray:
+  - layer: {fileID: 8574412962073106934, guid: 4aa7972461d59054ab5c5bfe51efbd81, type: 2}
+    bumpTexture: {fileID: 2800000, guid: 1cea5d890d360ce4599baa7b855ec996, type: 3}
+    bumpScale: 1
+    texture2DArray: {fileID: 18700000, guid: 861c4cd48e3b8d24ebeb46e776886f93, type: 2}
+  - layer: {fileID: 8574412962073106934, guid: 98e6077c127674a408311faeeaefe6b5, type: 2}
+    bumpTexture: {fileID: 2800000, guid: be8d6371fff6d2e4cb941ff7b8b9ebe2, type: 3}
+    bumpScale: 0.3
+    texture2DArray: {fileID: 18700000, guid: 551fb98d05cfa5a4c82c3580a37c428b, type: 2}
+  - layer: {fileID: 8574412962073106934, guid: 65910c85b44824a4ea7bddcfeed7c54d, type: 2}
+    bumpTexture: {fileID: 2800000, guid: 8c2eae98dd65cf543b1b7a569ff7b0f0, type: 3}
+    bumpScale: 0.5
+    texture2DArray: {fileID: 18700000, guid: 4fe8d519af5a9d040944af631ac1a79e, type: 2}
+  - layer: {fileID: 8574412962073106934, guid: 222a597835005ac48a6b1a73b315ba27, type: 2}
+    bumpTexture: {fileID: 2800000, guid: cc454bbc61e43e241a2f4d7693f5e007, type: 3}
+    bumpScale: 0.2
+    texture2DArray: {fileID: 18700000, guid: 9da377c72c07c0946842df034763bd6f, type: 2}
