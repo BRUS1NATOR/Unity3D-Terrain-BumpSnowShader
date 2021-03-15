@@ -8,11 +8,14 @@ You can even try 16 textures, by editing shader by yourself.
 ## LEAVE SNOW STEPS ON TERRAIN! ##
 Snow steps are rendered with second render camera and trailrenderer attached to gameobject.  
 
+| ![alt text](Images/sample.gif) | ![alt text](Images/snow_regen.gif) |
+|------------------------------------|--------------------------------------|
 
-| ![alt text](Images/sample.gif) | ![alt text](Images/snow_settings.gif) |
+## CUSTOMIZABLE SNOW & TRACKS ##
+| ![alt text](Images/snow_settings.gif) | ![alt text](Images/color_variation.gif) |
 |------------------------------------|--------------------------------------|
-| ![alt text](Images/snow_regen.gif) | ![alt text](Images/color_variation.gif) |
-|------------------------------------|--------------------------------------|
+
+## SETTINGS ##
 | ![alt text](Images/custom_texture_array_settings.png) | ![alt text](Images/settings.png) |
 |------------------------------------|--------------------------------------|
 
