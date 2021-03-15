@@ -3,7 +3,7 @@
    Properties{
 
 	   	[HideInInspector] _TerrainHolesTexture("Holes Map (RGB)", 2D) = "white" {}
-		     // used in fallback on old cards & base map
+		// used in fallback on old cards & base map
 		[HideInInspector] _MainTex("BaseMap (RGB) Trans (A)", 2D) = "white" {}
 		[HideInInspector] _Color("Main Color", Color) = (1,1,1,1)
 
@@ -75,6 +75,8 @@
 
 				sampler2D _TouchReact_Buffer;
 				float4 _TouchReact_Pos;
+
+				float4 _snowColorUpper, _snowColorBottom;
 
 					struct appdata {
 						float4 vertex    : POSITION;  // The vertex position in model space.
@@ -203,8 +205,10 @@
 						//HOLE 
 						clip(UNITY_SAMPLE_TEX2D(_TerrainHolesTexture, IN.uv_TerrainHolesTexture).r == 0.0f ? -1 : 1);
 
-			/*			float2 tbPos = (float2(IN.worldPos.x, -IN.worldPos.z) - (_TouchReact_Pos.xz)) / _TouchReact_Pos.w;
-						fixed4 touchBend = tex2D(_TouchReact_Buffer, tbPos);*/
+						float2 tbPos = (float2(IN.worldPos.x, -IN.worldPos.z) - (_TouchReact_Pos.xz)) / _TouchReact_Pos.w;
+						fixed4 touchBend = tex2D(_TouchReact_Buffer, tbPos);
+
+						fixed4 snowHue = lerp(_snowColorUpper, _snowColorBottom, touchBend.r);
 
 						fixed4 splat_control = tex2D(_Control, IN.uv_Control);
 						fixed4 splat_control2 = tex2D(_Control2, IN.uv_Control2);
@@ -260,6 +264,7 @@
 
 						//Albedo
 						terrainSnowColor = UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array1, _Array1, float3(uv / float2(_TileSizeArray[0].x, _TileSizeArray[0].y) + float2(_TileSizeArray[0].z, _TileSizeArray[0].w), 0));
+						terrainSnowColor *= snowHue;
 						//Normal
 						terrainSnowNormal = UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array1, _Array2, float3(uv / float2(_TileSizeArray[0].x, _TileSizeArray[0].y) + float2(_TileSizeArray[0].z, _TileSizeArray[0].w), 1)), _NormalScaleArray[0]);
 				

@@ -15,13 +15,21 @@ public enum TouchReactQuality
 
 public class NoTouchReact : MonoBehaviour
 {
-    public TouchReactQuality quality;
     public Camera TouchReactCamera;
     public Camera mainCamera;
+
+    public TouchReactQuality quality;
+    [Range(10,100)]
+    public int drawDistance = 24;
 
     private void Awake()
     {
         UpdateCamera();
+    }
+
+    private void OnValidate()
+    {
+        TouchReactCamera.orthographicSize = drawDistance;
     }
 
     // Start is called before the first frame update

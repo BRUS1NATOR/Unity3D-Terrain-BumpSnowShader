@@ -40,7 +40,6 @@ public class TerrainSnowManager : MonoBehaviour
     public Shader terrainShader;
 
     public List<CustomTerrain> customTerrains = new List<CustomTerrain>();
-    public List<Snow_Tracks> tracks = new List<Snow_Tracks>();
 
     public void Start()
     {

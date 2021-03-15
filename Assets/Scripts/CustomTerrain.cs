@@ -80,7 +80,6 @@ public class CustomTerrain : MonoBehaviour
 
             for (int i = 0; i < customTextures.textureArray.Count; i++)
             {
-                Debug.Log("!!!!" + customTextures.textureArray[i].GetTexturePath());
                 terrainMaterial.SetTexture("_Array" + (i + 1), Resources.Load(customTextures.textureArray[i].GetTexturePath()) as Texture2DArray);
             }
 

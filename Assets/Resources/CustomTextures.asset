@@ -15,7 +15,7 @@ MonoBehaviour:
   textureArray:
   - layer: {fileID: 8574412962073106934, guid: 4aa7972461d59054ab5c5bfe51efbd81, type: 2}
     bumpTexture: {fileID: 2800000, guid: 1cea5d890d360ce4599baa7b855ec996, type: 3}
-    bumpScale: 1
+    bumpScale: 0.8
     texture2DArray: {fileID: 18700000, guid: 861c4cd48e3b8d24ebeb46e776886f93, type: 2}
   - layer: {fileID: 8574412962073106934, guid: 98e6077c127674a408311faeeaefe6b5, type: 2}
     bumpTexture: {fileID: 2800000, guid: be8d6371fff6d2e4cb941ff7b8b9ebe2, type: 3}
