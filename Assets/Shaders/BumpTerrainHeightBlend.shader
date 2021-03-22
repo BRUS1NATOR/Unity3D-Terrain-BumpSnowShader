@@ -1,4 +1,4 @@
-﻿Shader "MyTerrain/BumpTerrainHeightBlend"
+Shader "MyTerrain/BumpTerrainHeightBlend"
 {
    Properties{
 
@@ -221,11 +221,14 @@
 
 						fixed4 terrainSnowColor;
 						fixed3 terrainSnowNormal;
-						fixed4 terrainDataColor;
-						fixed3 terrainDataNormal;
+						fixed4 terrainDataColor = fixed4(0,0,0,0);
+						fixed3 terrainDataNormal = fixed3(0, 0, 0);
 
 						//sum of splat must be 1
-						float mult = 1 / (1 - splat_control.r);
+						float mult = (1 - splat_control.r);
+						if (mult > 0) {
+							mult = 1 / mult;
+						}
 
 						//Albedo
 						terrainDataColor = mult * splat_control.g * UNITY_SAMPLE_TEX2DARRAY(_Array2, float3(uv / float2(_TileSizeArray[1].x, _TileSizeArray[1].y) + float2(_TileSizeArray[1].z, _TileSizeArray[1].w), 0));
@@ -239,27 +242,31 @@
 
 
 						if (_ControlCount > 1) {
+							//Albedo
 							terrainDataColor += mult * splat_control2.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array5, _Array2, float3(uv / float2(_TileSizeArray[4].x, _TileSizeArray[4].y) + float2(_TileSizeArray[4].z, _TileSizeArray[4].w), 0));
 							terrainDataColor += mult * splat_control2.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array6, _Array2, float3(uv / float2(_TileSizeArray[5].x, _TileSizeArray[5].y) + float2(_TileSizeArray[5].z, _TileSizeArray[5].w), 0));
 							terrainDataColor += mult * splat_control2.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array7, _Array2, float3(uv / float2(_TileSizeArray[6].x, _TileSizeArray[6].y) + float2(_TileSizeArray[6].z, _TileSizeArray[6].w), 0));
 							terrainDataColor += mult * splat_control2.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array8, _Array2, float3(uv / float2(_TileSizeArray[7].x, _TileSizeArray[7].y) + float2(_TileSizeArray[7].z, _TileSizeArray[7].w), 0));
 
+							//Normal
 							terrainDataNormal += mult * splat_control2.r * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array5, _Array2, float3(uv / float2(_TileSizeArray[4].x, _TileSizeArray[4].y) + float2(_TileSizeArray[4].z, _TileSizeArray[4].w), 1)), _NormalScaleArray[4]);
 							terrainDataNormal += mult * splat_control2.g * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array6, _Array2, float3(uv / float2(_TileSizeArray[5].x, _TileSizeArray[5].y) + float2(_TileSizeArray[5].z, _TileSizeArray[5].w), 1)), _NormalScaleArray[5]);
 							terrainDataNormal += mult * splat_control2.b * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array7, _Array2, float3(uv / float2(_TileSizeArray[6].x, _TileSizeArray[6].y) + float2(_TileSizeArray[6].z, _TileSizeArray[6].w), 1)), _NormalScaleArray[6]);
 							terrainDataNormal += mult * splat_control2.a * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array8, _Array2, float3(uv / float2(_TileSizeArray[7].x, _TileSizeArray[7].y) + float2(_TileSizeArray[7].z, _TileSizeArray[7].w), 1)), _NormalScaleArray[7]);
-						}
+						
+							if (_ControlCount > 2) {
+								//Albedo
+								terrainDataColor += mult * splat_control3.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 0));
+								terrainDataColor += mult * splat_control3.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 0));
+								terrainDataColor += mult * splat_control3.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 0));
+								terrainDataColor += mult * splat_control3.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 0));
 
-						if (_ControlCount > 2) {
-							terrainDataColor += mult * splat_control3.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 0));
-							terrainDataColor += mult * splat_control3.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 0));
-							terrainDataColor += mult * splat_control3.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 0));
-							terrainDataColor += mult * splat_control3.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 0));
-
-							terrainDataNormal += mult * splat_control3.r * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 1)), _NormalScaleArray[8]);
-							terrainDataNormal += mult * splat_control3.g * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 1)), _NormalScaleArray[9]);
-							terrainDataNormal += mult * splat_control3.b * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 1)), _NormalScaleArray[10]);
-							terrainDataNormal += mult * splat_control3.a * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 1)), _NormalScaleArray[11]);
+								//Normal
+								terrainDataNormal += mult * splat_control3.r * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 1)), _NormalScaleArray[8]);
+								terrainDataNormal += mult * splat_control3.g * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 1)), _NormalScaleArray[9]);
+								terrainDataNormal += mult * splat_control3.b * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 1)), _NormalScaleArray[10]);
+								terrainDataNormal += mult * splat_control3.a * UnpackScaleNormal(UNITY_SAMPLE_TEX2DARRAY_SAMPLER(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 1)), _NormalScaleArray[11]);
+							}
 						}
 
 						//Albedo
