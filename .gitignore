@@ -2,6 +2,9 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
+
+/Assets/Resources/CustomTerrainShaderTextures/
+
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -57,4 +60,3 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
-

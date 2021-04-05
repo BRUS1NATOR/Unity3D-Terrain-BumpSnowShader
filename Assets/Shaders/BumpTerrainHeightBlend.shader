@@ -160,31 +160,17 @@ Shader "MyTerrain/BumpTerrainHeightBlend"
 								_terrainDispMap3 += splat_control3.b;
 								_terrainDispMap3 += splat_control3.a;
 
-								splat_control3.r = remap(0, _terrainDispMap3, 0, 1 - _snowDispMap, splat_control3.r);
-								splat_control3.g = remap(0, _terrainDispMap3, 0, 1 - _snowDispMap, splat_control3.g);
-								splat_control3.b = remap(0, _terrainDispMap3, 0, 1 - _snowDispMap, splat_control3.b);
-								splat_control3.a = remap(0, _terrainDispMap3, 0, 1 - _snowDispMap, splat_control3.a);
-
 								_terrainDispMap += splat_control3.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 0), 3).r * _BumpScaleArray[8];
 								_terrainDispMap += splat_control3.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 0), 3).r * _BumpScaleArray[9];
 								_terrainDispMap += splat_control3.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 0), 3).r * _BumpScaleArray[10];
 								_terrainDispMap += splat_control3.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 0), 3).r * _BumpScaleArray[11];
 							}
 
-							splat_control2.r = remap(0, _terrainDispMap2, 0, 1 - _snowDispMap, splat_control2.r);
-							splat_control2.g = remap(0, _terrainDispMap2, 0, 1 - _snowDispMap, splat_control2.g);
-							splat_control2.b = remap(0, _terrainDispMap2, 0, 1 - _snowDispMap, splat_control2.b);
-							splat_control2.a = remap(0, _terrainDispMap2, 0, 1 - _snowDispMap, splat_control2.a);
-
 							_terrainDispMap += splat_control2.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array5, _Array2, float3(uv / float2(_TileSizeArray[4].x, _TileSizeArray[4].y) + float2(_TileSizeArray[4].z, _TileSizeArray[4].w), 0), 3).r * _BumpScaleArray[4];
 							_terrainDispMap += splat_control2.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array6, _Array2, float3(uv / float2(_TileSizeArray[5].x, _TileSizeArray[5].y) + float2(_TileSizeArray[5].z, _TileSizeArray[5].w), 0), 3).r * _BumpScaleArray[5];
 							_terrainDispMap += splat_control2.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array7, _Array2, float3(uv / float2(_TileSizeArray[6].x, _TileSizeArray[6].y) + float2(_TileSizeArray[6].z, _TileSizeArray[6].w), 0), 3).r * _BumpScaleArray[6];
 							_terrainDispMap += splat_control2.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array8, _Array2, float3(uv / float2(_TileSizeArray[7].x, _TileSizeArray[7].y) + float2(_TileSizeArray[7].z, _TileSizeArray[7].w), 0), 3).r * _BumpScaleArray[7];
 						}
-
-						splat_control.g = remap(0, _terrainDispMap1, 0, 1 - _snowDispMap, splat_control.g);
-						splat_control.b = remap(0, _terrainDispMap1, 0, 1 - _snowDispMap, splat_control.b);
-						splat_control.a = remap(0, _terrainDispMap1, 0, 1 - _snowDispMap, splat_control.a);
 
 						_terrainDispMap += splat_control.g * UNITY_SAMPLE_TEX2DARRAY_LOD(_Array2, float3(uv / float2(_TileSizeArray[1].x, _TileSizeArray[1].y) + float2(_TileSizeArray[1].z, _TileSizeArray[1].w), 0), 3).r * _BumpScaleArray[1];
 						_terrainDispMap += splat_control.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array3, _Array2, float3(uv / float2(_TileSizeArray[2].x, _TileSizeArray[2].y) + float2(_TileSizeArray[2].z, _TileSizeArray[2].w), 0), 3).r * _BumpScaleArray[2];
