@@ -135,46 +135,34 @@ Shader "MyTerrain/BumpTerrainHeightBlend"
 							_snowDispMap = (splat_control.r - touchBend.r) * _GlobalSnowAmount * UNITY_SAMPLE_TEX2DARRAY_LOD(_Array1, float3(uv / float2(_TileSizeArray[0].x, _TileSizeArray[0].y) + float2(_TileSizeArray[0].z, _TileSizeArray[0].w), 0), 3).r * _BumpScaleArray[0];
 						}
 
-						float _terrainDispMap1 = 0;	//1 SPLAT DISPLACEMENT
-						_terrainDispMap1 += splat_control.g;
-						_terrainDispMap1 += splat_control.b;
-						_terrainDispMap1 += splat_control.a;
+						float mult = (1 - splat_control.r);
+						if (mult > 0) {
+							mult = 1 / mult;
+						}
 
 						//if 8 textures
 						if (_ControlCount > 1) {
 							float4 splat_control2 = tex2Dlod(_Control2, float4(v.texcoord.xy, 0, 0));
 
-							float _terrainDispMap2 = _terrainDispMap1;	//2 SPLAT DISPLACEMENT
-							_terrainDispMap2 += splat_control2.r;
-							_terrainDispMap2 += splat_control2.g;
-							_terrainDispMap2 += splat_control2.b;
-							_terrainDispMap2 += splat_control2.a;
-
 							//if 12 textures
 							if (_ControlCount > 2) {
 								float4 splat_control3 = tex2Dlod(_Control3, float4(v.texcoord.xy, 0, 0));
 
-								float _terrainDispMap3 = _terrainDispMap2; //3 SPLAT DISPLACEMENT
-								_terrainDispMap3 += splat_control3.r;
-								_terrainDispMap3 += splat_control3.g;
-								_terrainDispMap3 += splat_control3.b;
-								_terrainDispMap3 += splat_control3.a;
-
-								_terrainDispMap += splat_control3.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 0), 3).r * _BumpScaleArray[8];
-								_terrainDispMap += splat_control3.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 0), 3).r * _BumpScaleArray[9];
-								_terrainDispMap += splat_control3.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 0), 3).r * _BumpScaleArray[10];
-								_terrainDispMap += splat_control3.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 0), 3).r * _BumpScaleArray[11];
+								_terrainDispMap += mult * splat_control3.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array9, _Array2, float3(uv / float2(_TileSizeArray[8].x, _TileSizeArray[8].y) + float2(_TileSizeArray[8].z, _TileSizeArray[8].w), 0), 3).r * _BumpScaleArray[8];
+								_terrainDispMap += mult * splat_control3.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array10, _Array2, float3(uv / float2(_TileSizeArray[9].x, _TileSizeArray[9].y) + float2(_TileSizeArray[9].z, _TileSizeArray[9].w), 0), 3).r * _BumpScaleArray[9];
+								_terrainDispMap += mult * splat_control3.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array11, _Array2, float3(uv / float2(_TileSizeArray[10].x, _TileSizeArray[10].y) + float2(_TileSizeArray[10].z, _TileSizeArray[10].w), 0), 3).r * _BumpScaleArray[10];
+								_terrainDispMap += mult * splat_control3.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array12, _Array2, float3(uv / float2(_TileSizeArray[11].x, _TileSizeArray[11].y) + float2(_TileSizeArray[11].z, _TileSizeArray[11].w), 0), 3).r * _BumpScaleArray[11];
 							}
 
-							_terrainDispMap += splat_control2.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array5, _Array2, float3(uv / float2(_TileSizeArray[4].x, _TileSizeArray[4].y) + float2(_TileSizeArray[4].z, _TileSizeArray[4].w), 0), 3).r * _BumpScaleArray[4];
-							_terrainDispMap += splat_control2.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array6, _Array2, float3(uv / float2(_TileSizeArray[5].x, _TileSizeArray[5].y) + float2(_TileSizeArray[5].z, _TileSizeArray[5].w), 0), 3).r * _BumpScaleArray[5];
-							_terrainDispMap += splat_control2.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array7, _Array2, float3(uv / float2(_TileSizeArray[6].x, _TileSizeArray[6].y) + float2(_TileSizeArray[6].z, _TileSizeArray[6].w), 0), 3).r * _BumpScaleArray[6];
-							_terrainDispMap += splat_control2.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array8, _Array2, float3(uv / float2(_TileSizeArray[7].x, _TileSizeArray[7].y) + float2(_TileSizeArray[7].z, _TileSizeArray[7].w), 0), 3).r * _BumpScaleArray[7];
+							_terrainDispMap += mult * splat_control2.r * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array5, _Array2, float3(uv / float2(_TileSizeArray[4].x, _TileSizeArray[4].y) + float2(_TileSizeArray[4].z, _TileSizeArray[4].w), 0), 3).r * _BumpScaleArray[4];
+							_terrainDispMap += mult * splat_control2.g * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array6, _Array2, float3(uv / float2(_TileSizeArray[5].x, _TileSizeArray[5].y) + float2(_TileSizeArray[5].z, _TileSizeArray[5].w), 0), 3).r * _BumpScaleArray[5];
+							_terrainDispMap += mult * splat_control2.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array7, _Array2, float3(uv / float2(_TileSizeArray[6].x, _TileSizeArray[6].y) + float2(_TileSizeArray[6].z, _TileSizeArray[6].w), 0), 3).r * _BumpScaleArray[6];
+							_terrainDispMap += mult * splat_control2.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array8, _Array2, float3(uv / float2(_TileSizeArray[7].x, _TileSizeArray[7].y) + float2(_TileSizeArray[7].z, _TileSizeArray[7].w), 0), 3).r * _BumpScaleArray[7];
 						}
 
-						_terrainDispMap += splat_control.g * UNITY_SAMPLE_TEX2DARRAY_LOD(_Array2, float3(uv / float2(_TileSizeArray[1].x, _TileSizeArray[1].y) + float2(_TileSizeArray[1].z, _TileSizeArray[1].w), 0), 3).r * _BumpScaleArray[1];
-						_terrainDispMap += splat_control.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array3, _Array2, float3(uv / float2(_TileSizeArray[2].x, _TileSizeArray[2].y) + float2(_TileSizeArray[2].z, _TileSizeArray[2].w), 0), 3).r * _BumpScaleArray[2];
-						_terrainDispMap += splat_control.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array4, _Array2, float3(uv / float2(_TileSizeArray[3].x, _TileSizeArray[3].y) + float2(_TileSizeArray[3].z, _TileSizeArray[3].w), 0), 3).r * _BumpScaleArray[3];
+						_terrainDispMap += mult * splat_control.g * UNITY_SAMPLE_TEX2DARRAY_LOD(_Array2, float3(uv / float2(_TileSizeArray[1].x, _TileSizeArray[1].y) + float2(_TileSizeArray[1].z, _TileSizeArray[1].w), 0), 3).r * _BumpScaleArray[1];
+						_terrainDispMap += mult * splat_control.b * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array3, _Array2, float3(uv / float2(_TileSizeArray[2].x, _TileSizeArray[2].y) + float2(_TileSizeArray[2].z, _TileSizeArray[2].w), 0), 3).r * _BumpScaleArray[2];
+						_terrainDispMap += mult * splat_control.a * UNITY_SAMPLE_TEX2DARRAY_SAMPLER_LOD(_Array4, _Array2, float3(uv / float2(_TileSizeArray[3].x, _TileSizeArray[3].y) + float2(_TileSizeArray[3].z, _TileSizeArray[3].w), 0), 3).r * _BumpScaleArray[3];
 
 						if (_terrainDispMap > _snowDispMap) {
 							v.vertex.xyz += v.normal * _terrainDispMap;
